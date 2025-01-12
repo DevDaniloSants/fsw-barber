@@ -1,15 +1,15 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Poppins } from "next/font/google"
+
 import "./globals.css"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-})
+import { SidebarProvider } from "./_components/ui/sidebar"
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+import Header from "./_components/header"
+
+const poppins = Poppins({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 })
 
 export const metadata: Metadata = {
@@ -23,11 +23,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="pt-br">
+      <body className={`${poppins.className} dark antialiased`}>
+        <SidebarProvider>
+          <Header />
+          <main className="h-full w-dvw">{children}</main>
+        </SidebarProvider>
       </body>
     </html>
   )
