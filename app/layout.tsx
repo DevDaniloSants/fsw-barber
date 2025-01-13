@@ -6,6 +6,7 @@ import "./globals.css"
 import { SidebarProvider } from "./_components/ui/sidebar"
 
 import Header from "./_components/header"
+import Footer from "./_components/footer"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({
         <SidebarProvider>
           <Header />
           <main className="h-full w-dvw">{children}</main>
+          <Footer />
         </SidebarProvider>
       </body>
     </html>
