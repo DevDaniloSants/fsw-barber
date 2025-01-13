@@ -8,8 +8,7 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "border-transparent bg-violet-600 bg-opacity-20 text-primary hover:bg-primary/80",
+        default: "border-transparent bg-violet-600 bg-opacity-20 text-primary ",
         secondary:
           "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
         destructive:
