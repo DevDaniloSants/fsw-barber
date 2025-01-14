@@ -27,6 +27,47 @@ const Home = async () => {
             <SearchIcon size={16} />
           </Button>
         </div>
+        <div className="mt-6 flex items-center gap-3 overflow-auto">
+          <Button variant="secondary" className="gap-2">
+            <Image src={"/cabelo.svg"} alt="cabelo" width={16} height={16} />
+            Cabelo
+          </Button>
+
+          <Button variant="secondary" className="gap-2">
+            <Image src={"/barba.svg"} alt="barba" width={16} height={16} />
+            Barba
+          </Button>
+
+          <Button variant="secondary" className="gap-2">
+            <Image
+              src={"/acabamento.svg"}
+              alt="acabamento"
+              width={16}
+              height={16}
+            />
+            Acabamento
+          </Button>
+
+          <Button variant="secondary" className="gap-2">
+            <Image
+              src={"/sobrancelha.svg"}
+              alt="sobrancelha"
+              width={16}
+              height={16}
+            />
+            Sobrancelha
+          </Button>
+
+          <Button variant="secondary" className="gap-2">
+            <Image
+              src={"/hidratacao.svg"}
+              alt="hidratacao"
+              width={16}
+              height={16}
+            />
+            Hidratação
+          </Button>
+        </div>
         <div className="relative mt-4 h-[150px] w-full">
           <Image
             src={"/banner-01.svg"}
