@@ -4,6 +4,7 @@ import { Barbershop } from "@prisma/client"
 import { Button } from "./ui/button"
 import { StarIcon } from "lucide-react"
 import { Badge } from "./ui/badge"
+import Link from "next/link"
 
 interface BarbershopItemProps {
   barbershop: Barbershop
@@ -17,6 +18,7 @@ const BarbershopItem = ({ barbershop }: BarbershopItemProps) => {
           <Image
             src={barbershop.imageUrl}
             alt={barbershop.name}
+            sizes="100%"
             fill
             className="rounded-2xl object-cover p-1"
           />
@@ -33,8 +35,8 @@ const BarbershopItem = ({ barbershop }: BarbershopItemProps) => {
           <p className="truncate text-sm text-muted-foreground">
             {barbershop.address}
           </p>
-          <Button variant="secondary" className="mt-3 w-full">
-            Reservar
+          <Button variant="secondary" className="mt-3 w-full" asChild>
+            <Link href={`/barbershops/${barbershop.id}`}>Reservar</Link>
           </Button>
         </div>
       </CardContent>

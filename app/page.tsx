@@ -44,7 +44,9 @@ const Home = async () => {
           <Image
             src={"/banner-01.svg"}
             alt="banner"
+            priority
             className="rounded-xl object-cover"
+            sizes="100%"
             fill
           />
         </div>
