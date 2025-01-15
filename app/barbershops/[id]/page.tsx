@@ -7,6 +7,7 @@ import Link from "next/link"
 import { ChevronLeftIcon, MapPinIcon, StarIcon } from "lucide-react"
 import { notFound } from "next/navigation"
 import ServiceItem from "../_components/service-item"
+import PhoneItem from "../_components/phone-item"
 
 interface BarbeshopPageProps {
   params: { id: string }
@@ -73,6 +74,14 @@ const Barbershop = async ({ params }: BarbeshopPageProps) => {
         </h2>
         {barbershop.services.map((service) => (
           <ServiceItem key={service.id} service={service} />
+        ))}
+      </div>
+      <div className="space-y-3 p-5">
+        <h2 className="text-xs font-semibold uppercase text-gray-400">
+          Contato
+        </h2>
+        {barbershop.phones.map((phone, index) => (
+          <PhoneItem key={`${phone}-${index}`} phone={phone} />
         ))}
       </div>
     </div>
