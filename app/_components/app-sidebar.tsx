@@ -104,7 +104,10 @@ const AppSidebar = () => {
           <SidebarMenu>
             <SidebarGroup className="space-y-3 p-0">
               {quickSearchOption.map((option) => (
-                <CustomSidebarMenu key={option.title} href="/">
+                <CustomSidebarMenu
+                  key={option.title}
+                  href={`/barbershops?service=${option.title}`}
+                >
                   <Image
                     src={option.imageUrl}
                     alt={option.title}

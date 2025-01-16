@@ -25,7 +25,7 @@ const Search = () => {
 
   const onSubmit = (data: z.infer<typeof searchSchema>) => {
     console.log(data)
-    router.push(`/barbershops?search=${data.search}`)
+    router.push(`/barbershops?title=${data.search}`)
     form.reset()
   }
 
