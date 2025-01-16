@@ -5,7 +5,7 @@ import Header from "./header"
 
 export default function HideMenu() {
   const pathname = usePathname()
-  const hideMenuPaths = ["/barbershops"]
+  const hideMenuPaths = ["/barbershops/"]
 
   const hideMenu = pathname.startsWith(hideMenuPaths[0])
 
