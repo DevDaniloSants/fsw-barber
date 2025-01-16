@@ -10,6 +10,7 @@ import Footer from "./_components/footer"
 import { cookies } from "next/headers"
 import HideMenu from "./_components/hideMenu"
 import { Toaster } from "./_components/ui/sonner"
+import SessionProvider from "./_providers/session"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -33,12 +34,14 @@ export default async function RootLayout({
   return (
     <html lang="pt-br">
       <body className={`${poppins.className} dark antialiased`}>
-        <SidebarProvider defaultOpen={defaultOpen}>
-          <HideMenu />
-          <main className="h-full w-dvw flex-1">{children}</main>
-          <Toaster />
-          <Footer />
-        </SidebarProvider>
+        <SessionProvider>
+          <SidebarProvider defaultOpen={defaultOpen}>
+            <HideMenu />
+            <main className="h-full w-dvw flex-1">{children}</main>
+            <Toaster />
+            <Footer />
+          </SidebarProvider>
+        </SessionProvider>
       </body>
     </html>
   )
