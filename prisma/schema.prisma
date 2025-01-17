@@ -79,4 +79,7 @@ model Booking {
   user      User              @relation(fields: [userId], references: [id])
   serviceId String
   service   BarbershopService @relation(fields: [serviceId], references: [id])
+  date      DateTime
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
 }
