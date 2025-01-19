@@ -1,5 +1,3 @@
-import { db } from "@/app/_lib/prisma"
-
 import Image from "next/image"
 import CustomTrigger from "../_components/custom-trigger"
 import { Button } from "@/app/_components/ui/button"
@@ -8,6 +6,7 @@ import { ChevronLeftIcon, MapPinIcon, StarIcon } from "lucide-react"
 import { notFound } from "next/navigation"
 import ServiceItem from "../_components/service-item"
 import PhoneItem from "../_components/phone-item"
+import { getBarbershop } from "@/app/_data_access/barbeshop/get-barbershop"
 
 interface BarbeshopPageProps {
   params: { id: string }
@@ -16,14 +15,7 @@ interface BarbeshopPageProps {
 const Barbershop = async ({ params }: BarbeshopPageProps) => {
   const { id } = await params
 
-  const barbershop = await db.barbershop.findUnique({
-    where: {
-      id,
-    },
-    include: {
-      services: true,
-    },
-  })
+  const barbershop = await getBarbershop({ id })
 
   if (!barbershop) return notFound()
 
@@ -73,7 +65,11 @@ const Barbershop = async ({ params }: BarbeshopPageProps) => {
           Serviços
         </h2>
         {barbershop.services.map((service) => (
-          <ServiceItem key={service.id} service={service} />
+          <ServiceItem
+            key={service.id}
+            service={service}
+            barbershop={barbershop}
+          />
         ))}
       </div>
       <div className="space-y-3 p-5">

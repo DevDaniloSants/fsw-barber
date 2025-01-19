@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Poppins } from "next/font/google"
+import { Inter } from "next/font/google"
 
 import "./globals.css"
 
@@ -12,7 +12,7 @@ import HideMenu from "./_components/hideMenu"
 import { Toaster } from "./_components/ui/sonner"
 import SessionProvider from "./_providers/session"
 
-const poppins = Poppins({
+const poppins = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 })
