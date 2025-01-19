@@ -12,7 +12,13 @@ const Header = () => {
       <Card className="rounded-none">
         <CardContent className="flex items-center justify-between p-5">
           <Link href={"/"}>
-            <Image src={"/logo.svg"} alt="FSW Barber" width={130} height={22} />
+            <Image
+              src={"/logo.svg"}
+              alt="FSW Barber"
+              width={130}
+              height={22}
+              priority
+            />
           </Link>
           <SidebarTrigger variant={"ghost"}>
             <MenuIcon />
