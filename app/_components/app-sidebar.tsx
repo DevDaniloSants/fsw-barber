@@ -1,6 +1,6 @@
 "use client"
 import { CalendarIcon, HomeIcon, LogInIcon, LogOutIcon } from "lucide-react"
-import { signIn, signOut, useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 import {
   SidebarHeader,
   SidebarContent,
@@ -16,19 +16,12 @@ import { Avatar, AvatarImage } from "./ui/avatar"
 
 import CustomSidebarMenu from "./customSidebarMenu"
 import { Button } from "./ui/button"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "./ui/dialog"
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog"
+import SignInDialog from "./sign-in-dialog"
 
 const AppSidebar = () => {
   const { data: session } = useSession()
 
-  const handleSignInClick = () => signIn("google")
   const handleSignOutClick = () => signOut()
 
   return (
@@ -51,35 +44,12 @@ const AppSidebar = () => {
             <h2 className="font-bold">Olá. Faça seu login!</h2>
             <Dialog>
               <DialogTrigger asChild>
-                <Button
-                  size="icon"
-                  className="rounded-lg"
-                  onClick={handleSignInClick}
-                >
+                <Button size="icon" className="rounded-lg">
                   <LogInIcon />
                 </Button>
               </DialogTrigger>
               <DialogContent className="w-[90%] rounded-lg">
-                <DialogHeader className="flex items-center justify-center">
-                  <DialogTitle>Faça login na plataforma</DialogTitle>
-                  <DialogDescription>
-                    Conecte-se usando sua conta do Google
-                  </DialogDescription>
-                </DialogHeader>
-
-                <Button
-                  variant={"outline"}
-                  className="flex w-full gap-2 rounded-lg"
-                  onClick={handleSignInClick}
-                >
-                  <Image
-                    src={"/google.svg"}
-                    alt="google"
-                    width={16}
-                    height={16}
-                  />
-                  Google
-                </Button>
+                <SignInDialog />
               </DialogContent>
             </Dialog>
           </div>
