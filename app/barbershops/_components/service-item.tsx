@@ -113,11 +113,11 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
 
       await createBooking({
         serviceId: service.id,
-        userId: data?.user?.id,
         date: newDate,
       })
 
       handleBookingSheetOpenChange()
+      toast.success("Reserva realizada com sucesso")
     } catch (error) {
       console.error(error)
       toast.error("Não foi possível realizar a reserva")
