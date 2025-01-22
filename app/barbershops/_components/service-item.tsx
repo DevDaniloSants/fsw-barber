@@ -22,11 +22,11 @@ import { useEffect, useState } from "react"
 import { format, set } from "date-fns"
 import { createBooking } from "@/app/_actions/booking/create-booking"
 import { useSession } from "next-auth/react"
-import { getBookings } from "@/app/_actions/booking/get-bookings"
 import { Booking } from "@prisma/client"
 import { toast } from "sonner"
 import { Dialog, DialogContent } from "@/app/_components/ui/dialog"
 import SignInDialog from "@/app/_components/sign-in-dialog"
+import { getDailyBookings } from "@/app/_actions/booking/get-daily-bookings"
 
 interface ServiceItemProps {
   service: BarbershopServiceDto
@@ -65,7 +65,7 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
   useEffect(() => {
     const fetch = async () => {
       if (!selectedDay) return
-      const bookings = await getBookings({
+      const bookings = await getDailyBookings({
         serviceId: service.id,
         date: selectedDay,
       })

@@ -8,7 +8,7 @@ interface GetBookings {
   date: Date
 }
 
-export const getBookings = async ({ serviceId, date }: GetBookings) => {
+export const getDailyBookings = async ({ serviceId, date }: GetBookings) => {
   return db.booking.findMany({
     where: {
       serviceId,
