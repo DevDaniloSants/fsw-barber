@@ -7,6 +7,7 @@ import { quickSearchOption } from "./_constants/search"
 import BookingItem from "./_components/booking-item"
 import Search from "./_components/search"
 import Link from "next/link"
+import { getBookings } from "./_actions/booking/get-bookings"
 
 const Home = async () => {
   const barberShops = await db.barbershop.findMany({})
@@ -15,6 +16,10 @@ const Home = async () => {
       name: "desc",
     },
   })
+
+  const confirmedBookings = await (
+    await getBookings()
+  ).filter((booking) => booking.date > new Date())
 
   return (
     <div>
@@ -60,7 +65,11 @@ const Home = async () => {
             Agendamentos
           </h2>
 
-          <BookingItem />
+          <div className="flex flex-row gap-2 overflow-x-auto">
+            {confirmedBookings.map((booking) => (
+              <BookingItem key={booking.id} booking={booking} />
+            ))}
+          </div>
         </div>
 
         <div className="mt-6">
