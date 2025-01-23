@@ -17,9 +17,7 @@ const Home = async () => {
     },
   })
 
-  const confirmedBookings = await (
-    await getBookings()
-  ).filter((booking) => booking.date > new Date())
+  const { confirmedBookings } = await await getBookings()
 
   return (
     <div>

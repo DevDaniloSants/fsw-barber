@@ -5,19 +5,11 @@ import { auth } from "../_lib/auth"
 
 const BookingPage = async () => {
   const session = await auth()
-  if (!session) {
+  if (!session?.user) {
     return notFound()
   }
 
-  const bookings = await getBookings()
-
-  const confirmedBookings = bookings.filter(
-    (booking) => booking.date > new Date(),
-  )
-
-  const finishedBookings = bookings.filter(
-    (booking) => booking.date < new Date(),
-  )
+  const { confirmedBookings, finishedBookings } = await getBookings()
 
   return (
     <div className="space-y-3 p-5">
