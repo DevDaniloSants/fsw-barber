@@ -5,8 +5,9 @@ import Link from "next/link"
 import { ChevronLeftIcon, MapPinIcon, StarIcon } from "lucide-react"
 import { notFound } from "next/navigation"
 import ServiceItem from "../_components/service-item"
-import PhoneItem from "../_components/phone-item"
+
 import { getBarbershop } from "@/app/_data_access/barbeshop/get-barbershop"
+import PhoneItem from "@/app/_components/phone-item"
 
 interface BarbeshopPageProps {
   params: { id: string }

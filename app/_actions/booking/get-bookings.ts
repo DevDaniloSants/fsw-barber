@@ -54,7 +54,19 @@ export const getBookings = async () => {
   ])
 
   return {
-    confirmedBookings,
-    finishedBookings,
+    confirmedBookings: confirmedBookings.map((booking) => ({
+      ...booking,
+      service: {
+        ...booking.service,
+        price: Number(booking.service.price),
+      },
+    })),
+    finishedBookings: finishedBookings.map((booking) => ({
+      ...booking,
+      service: {
+        ...booking.service,
+        price: Number(booking.service.price),
+      },
+    })),
   }
 }
