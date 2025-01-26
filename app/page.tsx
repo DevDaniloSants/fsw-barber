@@ -8,8 +8,12 @@ import BookingItem from "./_components/booking-item"
 import Search from "./_components/search"
 import Link from "next/link"
 import { getBookings } from "./_actions/booking/get-bookings"
+import { auth } from "./_lib/auth"
+import { format } from "date-fns"
+import { ptBR } from "date-fns/locale"
 
 const Home = async () => {
+  const session = await auth()
   const barberShops = await db.barbershop.findMany({})
   const popularBarberShops = await db.barbershop.findMany({
     orderBy: {
@@ -22,8 +26,12 @@ const Home = async () => {
   return (
     <div>
       <div className="p-5">
-        <h2 className="text-xl font-bold">Olá, Danilo</h2>
-        <p className="text-sm">Sexta, 2 de Janeiro</p>
+        <h2 className="text-xl font-bold">
+          Olá, {session?.user ? session.user.name : "bem-vindo (a)"}
+        </h2>
+        <p className="text-sm">
+          {format(new Date(), "EEEE, dd 'de' LLLL", { locale: ptBR })}
+        </p>
         <div className="mt-6">
           <Search />
         </div>
