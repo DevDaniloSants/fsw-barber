@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky && primsa generate"
+    "prepare": "husky && prisma generate"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.mjs"
