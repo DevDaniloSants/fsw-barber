@@ -2,14 +2,11 @@ import { db } from "../_lib/prisma"
 import BarbershopItem from "../_components/barbershop-item"
 import Search from "../_components/search"
 
-interface BarbershopsPageProps {
-  searchParams: {
-    title?: string
-    service?: string
-  }
-}
-
-const BarbershopsPage = async ({ searchParams }: BarbershopsPageProps) => {
+const BarbershopsPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ title?: string; service?: string }>
+}) => {
   const { title, service } = await searchParams
 
   const barbershops = await db.barbershop.findMany({

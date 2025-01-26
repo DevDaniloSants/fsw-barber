@@ -9,11 +9,7 @@ import ServiceItem from "../_components/service-item"
 import { getBarbershop } from "@/app/_data_access/barbeshop/get-barbershop"
 import PhoneItem from "@/app/_components/phone-item"
 
-interface BarbeshopPageProps {
-  params: { id: string }
-}
-
-const Barbershop = async ({ params }: BarbeshopPageProps) => {
+const Barbershop = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params
 
   const barbershop = await getBarbershop({ id })
