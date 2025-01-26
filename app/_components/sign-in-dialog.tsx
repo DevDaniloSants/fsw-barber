@@ -19,7 +19,7 @@ const SignInDialog = () => {
         className="flex w-full gap-2 rounded-lg"
         onClick={handleSignInClick}
       >
-        <Image src={"/google.svg"} alt="google" width={16} height={16} />
+        <Image src={"/Google.svg"} alt="google" width={16} height={16} />
         Google
       </Button>
     </>
