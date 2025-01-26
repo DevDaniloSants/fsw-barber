@@ -57,7 +57,7 @@ const Home = async () => {
         </div>
         <div className="relative mt-4 h-[150px] w-full">
           <Image
-            src={"/banner-01.svg"}
+            src={"/Banner-01.svg"}
             alt="banner"
             priority
             className="rounded-xl object-cover"
