@@ -21,7 +21,7 @@ const Home = async () => {
     },
   })
 
-  const { confirmedBookings } = await await getBookings()
+  const { confirmedBookings } = await getBookings()
 
   return (
     <div>
@@ -66,17 +66,19 @@ const Home = async () => {
           />
         </div>
 
-        <div className="mt-6">
-          <h2 className="mb-3 text-xs font-semibold uppercase text-gray-400">
-            Agendamentos
-          </h2>
+        {confirmedBookings.length > 0 && (
+          <div className="mt-6">
+            <h2 className="mb-3 text-xs font-semibold uppercase text-gray-400">
+              Agendamentos
+            </h2>
 
-          <div className="flex flex-row gap-2 overflow-x-auto">
-            {confirmedBookings.map((booking) => (
-              <BookingItem key={booking.id} booking={booking} />
-            ))}
+            <div className="flex flex-row gap-2 overflow-x-auto">
+              {confirmedBookings.map((booking) => (
+                <BookingItem key={booking.id} booking={booking} />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="mt-6">
           <h2 className="mb-3 text-xs font-semibold uppercase text-gray-400">

@@ -19,7 +19,7 @@ import {
 import Image from "next/image"
 import { AVAILABLE_HOURS } from "@/app/_constants/avaible-hours"
 import { useEffect, useMemo, useState } from "react"
-import { format, isPast, isToday, set } from "date-fns"
+import { isPast, isToday, set } from "date-fns"
 import { createBooking } from "@/app/_actions/booking/create-booking"
 import { useSession } from "next-auth/react"
 import { Booking } from "@prisma/client"
@@ -27,6 +27,7 @@ import { toast } from "sonner"
 import { Dialog, DialogContent } from "@/app/_components/ui/dialog"
 import SignInDialog from "@/app/_components/sign-in-dialog"
 import { getDailyBookings } from "@/app/_actions/booking/get-daily-bookings"
+import BookingSummary from "@/app/_components/booking-summary"
 
 interface ServiceItemProps {
   service: BarbershopServiceDto
@@ -91,6 +92,15 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
     fetch()
   }, [service.id, selectedDay])
 
+  const selectedDate = useMemo(() => {
+    if (!selectedDay || !selectedTime) return
+
+    return set(selectedDay, {
+      hours: Number(selectedTime?.split(":")[0]),
+      minutes: Number(selectedTime?.split(":")[1]),
+    })
+  }, [selectedDay, selectedTime])
+
   const handleBookingClick = () => {
     if (data?.user) {
       return setBookingSheetIsOpen(true)
@@ -116,20 +126,13 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
 
   const handleCreateBooking = async () => {
     try {
-      if (!data?.user?.id || !selectedDay || !selectedTime) {
+      if (!data?.user?.id || !selectedDate) {
         return
       }
 
-      const hour = selectedTime?.split(":")[0]
-      const minute = selectedTime?.split(":")[1]
-      const newDate = set(selectedDay, {
-        minutes: Number(minute),
-        hours: Number(hour),
-      })
-
       await createBooking({
         serviceId: service.id,
-        date: newDate,
+        date: selectedDate,
       })
 
       handleBookingSheetOpenChange()
@@ -222,37 +225,13 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
                         )}
                       </div>
                     )}
-                    {selectedTime && selectedDay && (
+                    {selectedDate && (
                       <div className="p-5">
-                        <Card>
-                          <CardContent className="space-y-3 p-3">
-                            <div className="flex items-center justify-between">
-                              <h2 className="font-semibold">{service.name}</h2>
-                              <p className="text-sm font-light">
-                                {Intl.NumberFormat("pt-br", {
-                                  currency: "brl",
-                                  style: "currency",
-                                }).format(service.price)}
-                              </p>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <p className="text-sm text-gray-400">Data</p>
-                              <p className="text-sm">
-                                {format(selectedDay, "d 'de' MMMM", {
-                                  locale: ptBR,
-                                })}
-                              </p>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <p className="text-sm text-gray-400">Horário</p>
-                              <p className="text-sm">{selectedTime}</p>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <p className="text-sm text-gray-400">Barbearia</p>
-                              <p className="text-sm">{barbershop.name}</p>
-                            </div>
-                          </CardContent>
-                        </Card>
+                        <BookingSummary
+                          barbershop={barbershop}
+                          service={service}
+                          selectedDate={selectedDate}
+                        />
                       </div>
                     )}
                   </div>

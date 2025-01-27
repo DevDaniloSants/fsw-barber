@@ -33,6 +33,7 @@ import {
 import { deleteBooking } from "../_actions/booking/delete-booking"
 import { useState } from "react"
 import { toast } from "sonner"
+import BookingSummary from "./booking-summary"
 
 interface BookingItemProps {
   booking: Omit<
@@ -152,7 +153,6 @@ const BookingItem = ({ booking }: BookingItemProps) => {
               </CardContent>
             </Card>
           </div>
-
           <div className="mb-3 mt-6">
             {isConfirmed ? (
               <Badge>Confirmado</Badge>
@@ -160,39 +160,11 @@ const BookingItem = ({ booking }: BookingItemProps) => {
               <Badge variant="secondary">Finalizado</Badge>
             )}
           </div>
-          <Card className="mb-6">
-            <CardContent className="space-y-3 p-3">
-              <div className="flex items-center justify-between">
-                <h2 className="font-semibold">{booking.service.name}</h2>
-                <p className="text-sm font-light">
-                  {Intl.NumberFormat("pt-br", {
-                    currency: "brl",
-                    style: "currency",
-                  }).format(Number(booking.service.price))}
-                </p>
-              </div>
-              <div className="flex items-center justify-between">
-                <p className="text-sm text-gray-400">Data</p>
-                <p className="text-sm">
-                  {format(booking.date, "d 'de' MMMM", {
-                    locale: ptBR,
-                  })}
-                </p>
-              </div>
-              <div className="flex items-center justify-between">
-                <p className="text-sm text-gray-400">Horário</p>
-                <p className="text-sm">
-                  {format(booking.date, "HH:mm", {
-                    locale: ptBR,
-                  })}
-                </p>
-              </div>
-              <div className="flex items-center justify-between">
-                <p className="text-sm text-gray-400">Barbearia</p>
-                <p className="text-sm">{barbershop.name}</p>
-              </div>
-            </CardContent>
-          </Card>
+          <BookingSummary
+            barbershop={barbershop}
+            service={booking.service}
+            selectedDate={booking.date}
+          />
           <div className="space-y-2">
             {barbershop.phones.map((phone, i) => (
               <PhoneItem key={`${phone}${i}`} phone={phone} />
