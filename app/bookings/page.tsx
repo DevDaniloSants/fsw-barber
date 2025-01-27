@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation"
-import { getBookings } from "../_actions/booking/get-bookings"
 import BookingItem from "../_components/booking-item"
 import { auth } from "../_lib/auth"
+import { getConfirmedBookings } from "../_data_access/booking/get-confirmed-bookings"
+import { getFinishedBookings } from "../_data_access/booking/get-finished-bookings"
 
 const BookingPage = async () => {
   const session = await auth()
@@ -9,7 +10,9 @@ const BookingPage = async () => {
     return notFound()
   }
 
-  const { confirmedBookings, finishedBookings } = await getBookings()
+  const finishedBookings = await getFinishedBookings()
+
+  const confirmedBookings = await getConfirmedBookings()
 
   return (
     <div className="space-y-3 p-5">

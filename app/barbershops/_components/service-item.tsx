@@ -26,7 +26,7 @@ import { Booking } from "@prisma/client"
 import { toast } from "sonner"
 import { Dialog, DialogContent } from "@/app/_components/ui/dialog"
 import SignInDialog from "@/app/_components/sign-in-dialog"
-import { getDailyBookings } from "@/app/_actions/booking/get-daily-bookings"
+import { getDailyBookings } from "@/app/_data_access/booking/get-daily-bookings"
 import BookingSummary from "@/app/_components/booking-summary"
 import { useRouter } from "next/navigation"
 
